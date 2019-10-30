@@ -44,24 +44,22 @@ function start() {
  * Þarf aðútfæra með lykkju og flæðisstýringum
  */
 function play() {
-  const timeStart = new Date();
-
-  const random = randomNumber(1,100);
+  const random = randomNumber(0,100);
   let numberOfGuesses = 0;
   let parseAnswer = 101;
 
   while (parseAnswer != random) {
   let studentAnswer = prompt(`Giskaðu á tölu á milli 0 og 100`);
+  if(studentAnswer === null){
+    alert(`Hætt í leik`);
+    getResults();
+  }
   parseAnswer = parseGuess(studentAnswer);
   let response = getResponse(parseAnswer, random);
   alert(response);
   numberOfGuesses++;
   }
   games.push(numberOfGuesses);
-
-  const timeEnd = new Date();
-  const time = (timeEnd - timeStart)/1000;
-  
 }
 
 
@@ -79,9 +77,9 @@ function getResults(){
     alert(`Þú spilaðir engann leik >_<`)
   }
   else {
-    alert(`Þú spilaðir ${games.length} leiki \nMeðalfjöldi ágiskana var ${calculateAverage()}`)
+    alert(`Þú spilaðir ${games.length.toFixed(2)} leiki \nMeðalfjöldi ágiskana var ${calculateAverage().toFixed(2)}`)
   }
-
+  
 }
 
 /**
